@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Register - Frameza</title>
+    <meta name="description" content="Register to Frameza AI Video Generator!">
+    <meta name="keywords" content="login, ai, video, frameza, ai video generator">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Frameza</div>
+        <button class="get-started-btn" onclick="goToLogin()">Login</button>
+    </div>
+
+    <div class="login">
+        <h1>Register</h1>
+        <p id="error-message"></p>
+        <input id="username" type="text" placeholder="Email address">
+        <input id="password" type="password" placeholder="Password">
+        <input id="passwordAgain" type="password" placeholder="Password again">
+        <button id="register">Register</button>
+        <p class="no-account" onclick="goToLogin()">Have an acount? <u class="underlined">Click here!</u></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

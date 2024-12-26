@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="robots" content="noindex, follow">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="logo">Frameza</div>
+        <button class="get-started-btn" id="credits">0 Credits</button>
+    </div>
+
+    <div class="container">
+        <h1>Select Model</h1>
+        <div class="buttons">
+            <button id="starterBtn" class="toggle-btn active">Starter</button>
+            <button id="proBtn" class="toggle-btn">Pro</button>
+        </div>
+    </div>
+    
+    <div class="textarea-container-container">
+        <div class="textarea-container">
+            <label for="auto-resize">Prompt</label>
+            <textarea id="auto-resize" rows="1" placeholder="Type here..."></textarea>
+        </div>
+    </div>
+
+    <div class="textarea-container-container">
+        <div class="textarea-container">
+            <label for="fileUploadBox">Image</label>
+            <div id="fileUploadBox" class="file-upload-box">
+                Select File
+                <input type="file" id="fileInput" accept="image/*">
+                <span id="fileName">No file chosen</span>
+                <img id="imagePreview" src="" alt="Image Preview" />
+                <span id="removeFile">X</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="textarea-container-container">
+        <div class="runbtn-container">
+            <p id="creditCost">Cost: 1 Credit</p>
+            <button class="get-started-btn" id="run">Generate</button>
+        </div>
+    </div>
+
+    <div class="textarea-container-container">
+        <div class="errorbox">
+            <p id="errorText"></p>
+        </div>
+    </div>
+
+    <div class="textarea-container-container">
+        <div class="videobox">
+            <video id="generatedVideo" controls style="display:none;"></video>
+        </div>
+    </div>
+
+    
+
+    <button class="get-started-btn" id="logout">Logout</button>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
