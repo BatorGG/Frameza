@@ -1,4 +1,4 @@
-const baseURL = "https://frameza.onrender.com"
+const baseURL = "http://localhost:3000"
 const fileUploadBox = document.getElementById('fileUploadBox');
 const fileInput = document.getElementById('fileInput');
 const fileNameSpan = document.getElementById('fileName');
@@ -107,6 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = div.textContent;
         div.innerHTML = text.replace(/\n/g, '<br>');
     }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+
+    if (ref) {
+        localStorage.setItem("ref", ref)
+        window.history.replaceState(null, '', window.location.pathname);
+    }
     
 });
 
@@ -168,6 +176,7 @@ if (registerBtn) {
     const password = document.getElementById("password").value;
     const passwordAgain = document.getElementById("passwordAgain").value;
     const errorMessage = document.getElementById("error-message")
+    const ref = localStorage.getItem("ref");
 
     if (!validateEmail(email)) {
       errorMessage.innerText = "Invalid email address"
@@ -186,7 +195,8 @@ if (registerBtn) {
         method: 'POST',
         body: JSON.stringify({ 
           email: email,
-          password: password
+          password: password,
+          ref: ref
         }),
         headers: { 'Content-Type': 'application/json' }
       }).then(response => response.json())
@@ -224,6 +234,8 @@ function decodeJWT(token) {
     const decodedPayload = JSON.parse(atob(payloadBase64)); // Decodes the token
     return decodedPayload;
 }
+
+let clicked = false;
 
 function dashboard() {
     console.log("Dashboard ran")
@@ -288,8 +300,19 @@ function dashboard() {
         textarea.style.height = `${newHeight}px`;
     });
 
+    const runBtn = document.getElementById('run');
+    runBtn.addEventListener('click', async () => {
+        runBtn.innerText = "Please wait..."
+        clicked = true;
+        setTimeout(() => {
+            clicked = false;
+        }, 1000);
 
-    document.getElementById("run").addEventListener('click', async () => {
+        if (clicked) {
+            return
+        }
+
+
         const tokenn = localStorage.getItem('jwt');
         console.log(tokenn)
 
@@ -297,6 +320,10 @@ function dashboard() {
         console.log()
         const prompt = document.getElementById("auto-resize").value;
         const image = await getImageUri(selectedFile);
+
+        if (!prompt || !prompt.length < 10) {
+            document.getElementById("errorText").innerText = "Prompt too short";
+        }
 
         fetch(baseURL + "/protected", {
             method: 'POST',
@@ -311,6 +338,7 @@ function dashboard() {
           }).then(response => response.json())
             .then((data) => {
                 console.log('Success:', data)
+                runBtn.innerText = "Generate";
                 if (data.success) {
                     document.getElementById("errorText").innerText = "Video generation has started, this might take up to 10 minutes.";
 

@@ -64,6 +64,10 @@ body {
     cursor: pointer;
 }
 
+.logo img {
+    height: 30px;
+}
+
 .get-started-btn {
     background-color: #ff6600;
     color: #fff;
@@ -377,6 +381,12 @@ textarea {
 textarea::placeholder {
     color: gray; /* Change 'gray' to your desired color */
     font-style: italic; /* Optional: Style it further if needed */
+}
+
+#tip {
+    margin-top: 5px;
+    padding-left: 5px;
+    color: gray;
 }
 
 #image-select {
