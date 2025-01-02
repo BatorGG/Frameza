@@ -60,6 +60,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   credits: { type: Number, default: 0 },
+  ref: { type: String, default: "" }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -68,7 +69,7 @@ const SECRET_KEY = process.env.JWT;
 
 // Route to register a new user
 app.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, ref } = req.body;
 
   //console.log(req.body)
   //console.log(email, password);
@@ -82,7 +83,7 @@ app.post('/register', async (req, res) => {
     else {
       
       const hashedPassword = await bcrypt.hash(password, 10);
-      user = new User({ email: email, password: hashedPassword, credits: 5});
+      user = new User({ email: email, password: hashedPassword, credits: 5, ref: ref });
       await user.save();
 
       console.log(user);
@@ -333,19 +334,25 @@ app.get('/checkout-session/:id', async (req, res) => {
             let token;
             const email = session.customer_details.email;
 
+            let user;
+            let credits;
             if (session.amount_subtotal == 699) {
                 console.log("Credit 50")
-                const user = await User.findOneAndUpdate(
+                credits = 50;
+                user = await User.findOneAndUpdate(
                     { email: email },
                     { $inc: { credits: 50 } }, // Increment the credits by 50
                     { new: true } // Return the updated document
                   );
 
                 token = jwt.sign({ email: email, credits: user.credits }, SECRET_KEY, { expiresIn: '24h' });
+
+                
             }
-            if (session.amount_subtotal == 9.99) {
+            if (session.amount_subtotal == 999) {
                 console.log("Credit 100")
-                const user = await User.findOneAndUpdate(
+                credits = 100;
+                user = await User.findOneAndUpdate(
                     { email: email },
                     { $inc: { credits: 100 } }, // Increment the credits by 50
                     { new: true } // Return the updated document
@@ -354,12 +361,23 @@ app.get('/checkout-session/:id', async (req, res) => {
             }
             if (session.amount_subtotal == 1699) {
                 console.log("Credit 200")
-                const user = await User.findOneAndUpdate(
+                credits = 200;
+                user = await User.findOneAndUpdate(
                     { email: email },
                     { $inc: { credits: 200 } }, // Increment the credits by 50
                     { new: true } // Return the updated document
                 );
                 token = jwt.sign({ email: email, credits: user.credits }, SECRET_KEY, { expiresIn: '24h' });
+            }
+
+            if (user.ref) {
+                
+                const refUser = await User.findOneAndUpdate(
+                    { email: user.ref },
+                    { $inc: { credits: Math.round(credits/5) } }, // Increment the credits by 5
+                    { new: true } // Return the updated document
+                )
+                console.log(refUser)
             }
             
             alreadyCredited.push(session.id)
