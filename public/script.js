@@ -303,21 +303,22 @@ function dashboard() {
     const runBtn = document.getElementById('run');
     runBtn.addEventListener('click', async () => {
         runBtn.innerText = "Please wait..."
+        if (clicked) {
+            return
+        }
+
         clicked = true;
         setTimeout(() => {
             clicked = false;
         }, 1000);
 
-        if (clicked) {
-            return
-        }
+        
 
 
         const tokenn = localStorage.getItem('jwt');
         console.log(tokenn)
 
         const activeElement = [starterBtn, proBtn].find(el => el.classList.contains('active'));
-        console.log()
         const prompt = document.getElementById("auto-resize").value;
         const image = await getImageUri(selectedFile);
 
@@ -325,7 +326,7 @@ function dashboard() {
             document.getElementById("errorText").innerText = "Prompt too short";
         }
 
-        fetch(baseURL + "/protected", {
+        fetch("/protected", {
             method: 'POST',
             body: JSON.stringify({ 
                 token: tokenn,
@@ -399,12 +400,15 @@ function dashboard() {
 }
 
 function checkForVideo(taskId) {
-    document.getElementById("errorText").innerText = "Checking for video status."
+    document.getElementById("errorText").innerText = "Checking for video status..."
 
     const interval = setInterval(async () => {
         const statusResponse = await fetch(`/task-status/${taskId}`);
         const task = await statusResponse.json();
         document.getElementById("errorText").innerText = "Video still generating, this might take up to 10 minutes."
+        setTimeout(() => {
+            document.getElementById("errorText").innerText = "Checking for video status..."
+        }, 4000);
 
         if (task.status === "done") {
             clearInterval(interval);
