@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frameza - AI Video Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+    <meta name="description" content="Effortlessly generate cool AI videos with Frameza. The only limit is your imagination!">
+    <meta name="keywords" content="frameza, ai, video, ai video generator">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="logo"><img src="/images/logo.png">Frameza</div>
+        <button class="get-started-btn" onclick="goToLogin()">Get Started</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Welcome to Frameza AI Video Generator</h1>
+        <p>Effortlessly generate cool AI videos with Frameza. The only limit is your imagination!</p>
+        <button class="get-started-btn" onclick="goToLogin()">Get Started</button>
+    </section>
+
+    <!-- Lite Model Section -->
+    <section class="pro-model-section">
+        <h2>Starter Model</h2>
+        <div class="video-section">
+            <div class="video-container">
+                <video preload="auto" muted autoplay loop playsinline poster="./images/fallback1.jpg">
+                    <source src="./images/video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="video-prompt">A man in a blue plaid shirt turns his head to look at a woman walking past in a red top. His expression is curious as he glances away from his companion in a light blue sleeveless top. The scene takes place on a busy city street with buildings and pedestrians visible in the background. The natural lighting suggests it's daytime. The camera captures the scene from street level, with the woman in red slightly out of focus in the foreground.</p>
+                <p>Generated in 13.1 seconds</p>
+            </div>
+            <div class="video-container">
+                <video preload="auto" muted autoplay loop playsinline poster="./images/fallback2.jpg">
+                    <source src="./images/video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="video-prompt">A chef prepares food in a professional kitchen. He has olive skin and dark, close-cropped hair, wearing traditional white chef's attire. Steam rises from the pan he's working with. The kitchen's stainless steel surfaces reflect the bright overhead lighting. The camera follows his hands as he cooks. The scene appears to be real-life footage.</p>
+                <p>Generated in 15.4 seconds</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pro-model-section">
+        <h2>Pro Model</h2>
+        <div class="video-section">
+            <div class="video-container">
+                <video preload="auto" muted autoplay loop playsinline poster="./images/fallback3.jpg">
+                    <source src="./images/video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="video-prompt">A woman is walking through a busy Tokyo street at night, she is wearing dark sunglasses.</p>
+                <p>Generated in 4 minutes 49 seconds</p>
+            </div>
+            <div class="video-container">
+                <video preload="auto" muted autoplay loop playsinline poster="./images/fallback4.jpg">
+                    <source src="./images/video4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p class="video-prompt">A cat walks on the grass, realistic style.</p>
+                <p>Generated in 7 minutes 35 seconds</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero-section">
+        <h2>Generate Videos Worth Sharing </h2>
+        <p>Let your imagination run wild and see what hilarious and unexpected videos you can conjure up!</p>
+        <button class="get-started-btn" onclick="goToLogin()">Get Started</button>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h2>Frameza</h2>
+            <div class="footer-links">
+                <a href="mailto:info@frameza.net">Contact Us</a>
+                <a href="/tos">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

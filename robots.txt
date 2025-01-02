@@ -1,0 +1,6 @@
+# Allow all bots to access everything
+User-agent: *
+Allow: /
+
+# Point to your sitemap
+Sitemap: https://frameza.onrender.com/sitemap.xml
