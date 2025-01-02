@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:3000"
+const baseURL = window.location.origin;
 const fileUploadBox = document.getElementById('fileUploadBox');
 const fileInput = document.getElementById('fileInput');
 const fileNameSpan = document.getElementById('fileName');
